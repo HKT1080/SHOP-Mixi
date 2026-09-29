@@ -12,6 +12,7 @@
         <h1 class="shop-title">Shop Bán Sỉ Vau</h1>
     </header>
 
+    <!-- KHU VỰC ĐĂNG KÝ / TÀI KHOẢN -->
     <section class="auth-box">
         <div id="auth-form-wrapper" class="auth-form">
             <input type="text" id="reg-user" placeholder="Tên tài khoản..." required>
@@ -25,55 +26,92 @@
         </div>
     </section>
 
-    <main>
-        <h2 class="section-title">I. Danh Sách Chọn Mặt Hàng</h2>
-        <div class="products-list">
-            
-            <div class="product-card">
-                <div class="product-details">
-                    <h3>1. Gói Pack Online Game FC 27</h3>
-                    <div class="product-price">2,300,000 đ</div>
-                    <div class="product-stock">Kho sỉ: <strong id="stock-p1">1</strong> cái</div>
-                    <div id="acc-info-box" class="info-result-box">
-                        <strong>🔑 THÔNG TIN ACC GAME:</strong><br>
-                        • Account: <span style="color:var(--danger); font-weight:bold;">MESSIBETTERTHANRONALDO</span><br>
-                        • Mật khẩu: <span style="color:var(--danger); font-weight:bold;">2022worldcup</span>
+    <!-- MỤC I. CHỌN MẶT HÀNG -->
+    <main class="main-layout">
+        <div class="left-column">
+            <h2 class="section-title">I. Danh Sách Chọn Mặt Hàng</h2>
+            <div class="products-list">
+                
+                <!-- Sản phẩm 1 -->
+                <div class="product-card">
+                    <div class="product-details">
+                        <h3>1. Gói Pack Online Game FC 27</h3>
+                        <div class="product-price">2,300,000 đ</div>
+                        <div class="product-stock">Kho sỉ: <strong id="stock-p1">1</strong> cái</div>
+                        <div id="acc-info-box" class="info-result-box">
+                            <strong>🔑 THÔNG TIN ACC GAME:</strong><br>
+                            • Account: <span style="color:var(--danger); font-weight:bold;">MESSIBETTERTHANRONALDO</span><br>
+                            • Mật khẩu: <span style="color:var(--danger); font-weight:bold;">2022worldcup</span>
+                        </div>
+                    </div>
+                    <div class="qty-control">
+                        <button class="btn-qty" onclick="changeQty('p1', -1)">-</button>
+                        <span class="qty-val" id="qty-p1">0</span>
+                        <button class="btn-qty" onclick="changeQty('p1', 1)">+</button>
                     </div>
                 </div>
-                <button id="btn-buy-p1" class="btn-general" style="background:var(--success)" onclick="buyProduct('p1')" disabled>MUA</button>
-            </div>
 
-            <div class="product-card">
-                <div class="product-details">
-                    <h3>2. iPhone 20 Pro Max</h3>
-                    <div class="product-price">500,000 đ</div>
-                    <div class="product-stock">Kho sỉ: <strong id="stock-p2">2</strong> cái</div>
+                <!-- Sản phẩm 2 -->
+                <div class="product-card">
+                    <div class="product-details">
+                        <h3>2. iPhone 20 Pro Max</h3>
+                        <div class="product-price">500,000 đ</div>
+                        <div class="product-stock">Kho sỉ: <strong id="stock-p2">2</strong> cái</div>
+                    </div>
+                    <div class="qty-control">
+                        <button class="btn-qty" onclick="changeQty('p2', -1)">-</button>
+                        <span class="qty-val" id="qty-p2">0</span>
+                        <button class="btn-qty" onclick="changeQty('p2', 1)">+</button>
+                    </div>
                 </div>
-                <button id="btn-buy-p2" class="btn-general" style="background:var(--success)" onclick="openDeliveryForm('p2')" disabled>MUA</button>
-            </div>
 
-            <div class="product-card">
-                <div class="product-details">
-                    <h3>3. ThinkPad T480</h3>
-                    <div class="product-price">2,000,000 đ</div>
-                    <div class="product-stock">Kho sỉ: <strong id="stock-p3">42</strong> cái</div>
+                <!-- Sản phẩm 3 -->
+                <div class="product-card">
+                    <div class="product-details">
+                        <h3>3. ThinkPad T480</h3>
+                        <div class="product-price">2,000,000 đ</div>
+                        <div class="product-stock">Kho sỉ: <strong id="stock-p3">42</strong> cái</div>
+                    </div>
+                    <div class="qty-control">
+                        <button class="btn-qty" onclick="changeQty('p3', -1)">-</button>
+                        <span class="qty-val" id="qty-p3">0</span>
+                        <button class="btn-qty" onclick="changeQty('p3', 1)">+</button>
+                    </div>
                 </div>
-                <button id="btn-buy-p3" class="btn-general" style="background:var(--success)" onclick="openDeliveryForm('p3')" disabled>MUA</button>
-            </div>
 
+            </div>
         </div>
 
-        <div id="delivery-form" class="delivery-form-container">
-            <h4 id="delivery-title" style="margin: 0 0 10px 0; color:#334155;">Thông Tin Nhận Hàng</h4>
-            <div class="form-grid">
-                <input type="text" id="deliv-name" placeholder="Tên người nhận..." required>
-                <input type="text" id="deliv-phone" placeholder="Số điện thoại..." required>
-                <input type="text" id="deliv-address" placeholder="Địa chỉ giao hàng chi tiết..." required>
+        <!-- KHU VỰC GIỎ HÀNG THỰC TẾ -->
+        <div class="right-column">
+            <h2 class="section-title">🛒 Giỏ Hàng Sỉ</h2>
+            <div class="cart-box">
+                <div id="cart-items-list">
+                    <div class="empty-cart">Giỏ hàng đang trống</div>
+                </div>
+                <div id="cart-summary" style="display:none; margin-top: 15px; border-top: 1px dashed #cbd5e1; padding-top: 10px;">
+                    <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.1em; margin-bottom:10px;">
+                        <span>Tổng tiền:</span>
+                        <span id="cart-total-price" style="color:var(--danger);">0 đ</span>
+                    </div>
+                    <button class="btn-general" style="background:var(--success); width:100%;" onclick="openDeliveryForm()">BẤM THANH TOÁN</button>
+                </div>
             </div>
-            <button class="btn-general" onclick="submitDelivery()">XÁC NHẬN ĐẶT HÀNG</button>
         </div>
     </main>
 
+    <!-- Form điền thông tin khi mua hàng sỉ -->
+    <div id="delivery-form" class="delivery-form-container">
+        <h4 style="margin: 0 0 10px 0; color:#334155;">Thông Tin Nhận Hàng Hoá Sỉ</h4>
+        <div class="form-grid">
+            <input type="text" id="deliv-name" placeholder="Tên người nhận..." required>
+            <input type="text" id="deliv-phone" placeholder="Số điện thoại..." required>
+            <input type="text" id="deliv-address" placeholder="Địa chỉ giao hàng chi tiết..." required>
+        </div>
+        <button class="btn-general" onclick="submitDelivery()">XÁC NHẬN GIAO HÀNG & TRỪ TIỀN</button>
+    </div>
+
+    <!-- MỤC II. VÒNG QUAY MAY MẮN -->
     <section class="wheel-section">
         <h2 class="section-title" style="margin:0; width:100%;">II. Vòng Quay May Mắn (Còn <span id="spin-count">3</span> lượt Free)</h2>
         
@@ -109,57 +147,65 @@
     }
     * { box-sizing: border-box; }
     body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; }
-    .app-container { width: 100%; max-width: 700px; display: flex; flex-direction: column; gap: 20px; }
+    .app-container { width: 100%; max-width: 850px; display: flex; flex-direction: column; gap: 20px; }
     
     .shop-header { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 25px; border-radius: 16px; text-align: center; box-shadow: 0 4px 15px rgba(37,99,235,0.1); }
     .shop-title { font-size: 2.2em; font-weight: 800; margin: 0; letter-spacing: 1px; text-transform: uppercase; }
     
-    .auth-box { background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .auth-box { background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center; }
     .auth-form { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
     .auth-form input { padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%; max-width: 180px; font-size: 0.9em; }
-    .btn-general { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+    
+    .btn-general { color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; background: var(--primary); }
     .btn-general:hover { background: var(--primary-hover); }
     .btn-general:disabled { background: #cbd5e1; cursor: not-allowed; }
     
     .user-info-panel { display: none; width: 100%; justify-content: center; gap: 20px; font-weight: bold; font-size: 1.1em; flex-wrap: wrap; background: #e0f2fe; padding: 12px; border-radius: 8px; color: #0369a1; }
-    .section-title { font-size: 1.4em; font-weight: 700; color: #0f172a; margin: 15px 0 10px 0; border-left: 5px solid var(--primary); padding-left: 10px; }
+    .section-title { font-size: 1.3em; font-weight: 700; color: #0f172a; margin: 0 0 10px 0; border-left: 5px solid var(--primary); padding-left: 10px; }
+    
+    /* Giao diện Chia 2 Cột: Hàng hoá bên trái, Giỏ hàng bên phải */
+    .main-layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; align-items: start; }
+    @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } }
     
     .products-list { display: flex; flex-direction: column; gap: 12px; }
-    .product-card { background: white; border-radius: 12px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #e2e8f0; gap: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .product-card { background: white; border-radius: 12px; padding: 15px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #e2e8f0; gap: 10px; }
     .product-details { flex: 1; min-width: 0; }
-    .product-details h3 { margin: 0 0 4px 0; color: #0f172a; font-size: 1.1em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .product-price { color: var(--danger); font-weight: bold; font-size: 1.1em; }
+    .product-details h3 { margin: 0 0 4px 0; color: #0f172a; font-size: 1.05em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .product-price { color: var(--danger); font-weight: bold; font-size: 1.05em; }
     .product-stock { font-size: 0.85em; color: #64748b; margin-top: 2px; }
     
-    .info-result-box { display: none; background: #fffde7; border-left: 4px solid #eab308; padding: 12px; margin-top: 10px; border-radius: 6px; font-size: 0.9em; word-break: break-all; }
+    /* Nút tăng số lượng */
+    .qty-control { display: flex; align-items: center; gap: 8px; background: #f1f5f9; padding: 4px; border-radius: 6px; }
+    .btn-qty { border: none; background: white; width: 28px; height: 28px; font-weight: bold; cursor: pointer; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .qty-val { font-weight: bold; min-width: 20px; text-align: center; }
+    
+    /* Khung hiển thị Giỏ hàng sỉ */
+    .cart-box { background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .empty-cart { color: #94a3b8; text-align: center; font-style: italic; padding: 10px 0; }
+    .cart-item-row { display: flex; justify-content: space-between; font-size: 0.9em; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid #f1f5f9; }
+    
+    .info-result-box { display: none; background: #fffde7; border-left: 4px solid #eab308; padding: 10px; margin-top: 8px; border-radius: 6px; font-size: 0.85em; word-break: break-all; }
     .delivery-form-container { display: none; background: #f1f5f9; padding: 15px; border-radius: 8px; margin-top: 10px; border: 1px solid #cbd5e1; }
     .form-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
     .form-grid input { padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9em; width: 100%; }
     
-    .wheel-section { background: white; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; align-items: center; gap: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-    .wheel-outer { position: relative; width: 260px; height: 260px; margin: 10px 0; }
+    /* Vòng Quay */
+    .wheel-section { background: white; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+    .wheel-outer { position: relative; width: 240px; height: 240px; }
     .wheel { width: 100%; height: 100%; border-radius: 50%; border: 6px solid #334155; background: conic-gradient(
-        #ef4444 0deg 0.9deg,     
-        #3b82f6 0.9deg 3.6deg,   
-        #10b981 3.6deg 18deg,    
-        #f59e0b 18deg 36deg,     
-        #8b5cf6 36deg 72deg,     
-        #ec4899 72deg 144deg,    
-        #64748b 144deg 252deg,   
-        #1e293b 252deg 360deg    
+        #ef4444 0deg 0.9deg, #3b82f6 0.9deg 3.6deg, #10b981 3.6deg 18deg, #f59e0b 18deg 36deg, #8b5cf6 36deg 72deg, #ec4899 72deg 144deg, #64748b 144deg 252deg, #1e293b 252deg 360deg
     ); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
     .wheel-pointer { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 24px solid #dc2626; z-index: 10; }
-    .reward-alert-box { display: none; background: #ecfdf5; border: 1px solid #10b981; padding: 12px; border-radius: 8px; text-align: center; color: #065f46; font-weight: bold; width: 100%; font-size: 0.95em; line-height: 1.4; }
+    .reward-alert-box { display: none; background: #ecfdf5; border: 1px solid #10b981; padding: 12px; border-radius: 8px; text-align: center; color: #065f46; font-weight: bold; width: 100%; font-size: 0.95em; }
 </style>
 <script>
     const user = { registered: false, username: "", balance: 0 };
     const products = {
-        p1: { name: "Gói Pack Online FC 27", price: 2300000, stock: 1 },
-        p2: { name: "iPhone 20 Pro Max", price: 500000, stock: 2 },
-        p3: { name: "ThinkPad T480", price: 2000000, stock: 42 }
+        p1: { name: "Gói Pack Online FC 27", price: 2300000, stock: 1, selected: 0 },
+        p2: { name: "iPhone 20 Pro Max", price: 500000, stock: 2, selected: 0 },
+        p3: { name: "ThinkPad T480", price: 2000000, stock: 42, selected: 0 }
     };
     let freeSpins = 3;
-    let currentSelectedProduct = "";
     let isSpinning = false;
 
     function handleRegister() {
@@ -184,6 +230,30 @@
         alert(`🎉 Đăng ký thành công!\nBạn đã nhận được quà tặng 10,000,000đ để mua sắm.`);
     }
 
+    // Thay đổi số lượng mặt hàng và kiểm tra điều kiện kho hàng
+    function changeQty(id, delta) {
+        if (!user.registered) {
+            alert("Vui lòng đăng ký tài khoản trước khi chọn mua hàng!");
+            return;
+        }
+        const prod = products[id];
+        const nextQty = prod.selected + delta;
+
+        if (nextQty < 0) return;
+
+        // KIỂM TRA: Không đặt quá số lượng tồn kho
+        if (nextQty > prod.stock) {
+            alert(`⚠️ Trong kho sỉ chỉ còn tối đa ${prod.stock} cái cho mặt hàng này!`);
+            return;
+        }
+
+        prod.selected = nextQty;
+        document.getElementById(`qty-${id}`).innerText = nextQty;
+        
+        updateUI();
+    }
+
+    // Cập nhật giao diện giỏ hàng và số dư tài khoản liên tục
     function updateUI() {
         document.getElementById("display-balance").innerText = user.balance.toLocaleString();
         document.getElementById("stock-p1").innerText = products.p1.stock;
@@ -192,58 +262,99 @@
         document.getElementById("spin-count").innerText = freeSpins;
 
         if (user.registered) {
-            document.getElementById("btn-buy-p1").disabled = products.p1.stock <= 0 || user.balance < products.p1.price;
-            document.getElementById("btn-buy-p2").disabled = products.p2.stock <= 0 || user.balance < products.p2.price;
-            document.getElementById("btn-buy-p3").disabled = products.p3.stock <= 0 || user.balance < products.p3.price;
             document.getElementById("btn-spin").disabled = freeSpins <= 0 || isSpinning;
+        }
+
+        // Tạo bảng danh sách hàng trong giỏ bên cột phải
+        const cartList = document.getElementById("cart-items-list");
+        const cartSummary = document.getElementById("cart-summary");
+        let htmlContent = "";
+        let totalCartPrice = 0;
+        let hasItem = false;
+
+        for (let key in products) {
+            let p = products[key];
+            if (p.selected > 0) {
+                hasItem = true;
+                let subTotal = p.selected * p.price;
+                totalCartPrice += subTotal;
+                htmlContent += `
+                    <div class="cart-item-row">
+                        <span>${p.name} <strong>(x${p.selected})</strong></span>
+                        <span style="font-weight:bold;">${subTotal.toLocaleString()} đ</span>
+                    </div>`;
+            }
+        }
+
+        if (hasItem) {
+            cartList.innerHTML = htmlContent;
+            cartSummary.style.display = "block";
+            document.getElementById("cart-total-price").innerText = totalCartPrice.toLocaleString() + " đ";
+        } else {
+            cartList.innerHTML = `<div class="empty-cart">Giỏ hàng đang trống</div>`;
+            cartSummary.style.display = "none";
         }
     }
 
-    function buyProduct(id) {
-        const prod = products[id];
-        if (user.balance < prod.price) return;
-        
-        user.balance -= prod.price; 
-        prod.stock -= 1; 
-        
-        document.getElementById("acc-info-box").style.display = "block";
-        updateUI();
-        alert("🎉 Mua thành công! Hãy xem thông tin tài khoản hiển thị trên màn hình.");
-    }
+    // Mở form nhập thông tin giao nhận khi bấm nút thanh toán
+    function openDeliveryForm() {
+        let totalCost = 0;
+        for (let key in products) {
+            totalCost += products[key].selected * products[key].price;
+        }
 
-    function openDeliveryForm(id) {
-        currentSelectedProduct = id;
-        const prod = products[id];
-        if (user.balance < prod.price) return;
-        
-        document.getElementById("delivery-title").innerText = `Nhận hàng: ${prod.name}`;
+        // KIỂM TRA: Tổng tiền giỏ hàng không vượt quá số tiền trong ví hiện tại
+        if (totalCost > user.balance) {
+            alert("❌ Không thể thanh toán! Tổng tiền mặt hàng lớn hơn số dư hiện có trong ví của bạn.");
+            return;
+        }
+
         document.getElementById("delivery-form").style.display = "block";
         document.getElementById("delivery-form").scrollIntoView({ behavior: 'smooth' });
     }
 
+    // Xử lý trừ kho, trừ tiền thực tế vật lý sau khi xác nhận form
     function submitDelivery() {
         const name = document.getElementById("deliv-name").value.trim();
         const phone = document.getElementById("deliv-phone").value.trim();
         const addr = document.getElementById("deliv-address").value.trim();
 
         if (!name || !phone || !addr) {
-            alert("Vui lòng điền trọn vẹn thông tin nhận hàng!");
+            alert("Vui lòng nhập trọn vẹn thông tin nhận hàng!");
             return;
         }
 
-        const prod = products[currentSelectedProduct];
-        user.balance -= prod.price; 
-        prod.stock -= 1; 
+        let totalCost = 0;
+        for (let key in products) {
+            totalCost += products[key].selected * products[key].price;
+        }
 
+        // Trực tiếp trừ tiền ví và trừ kho hàng sỉ
+        user.balance -= totalCost;
+        
+        // Kiểm tra xem có mua sản phẩm số 1 không để hiện code game ẩn
+        if (products.p1.selected > 0) {
+            document.getElementById("acc-info-box").style.display = "block";
+        }
+
+        for (let key in products) {
+            let p = products[key];
+            p.stock -= p.selected; 
+            p.selected = 0; // Đưa số lượng chọn mua về lại 0
+            document.getElementById(`qty-${key}`).innerText = "0";
+        }
+
+        // Reset sạch form nhập liệu
         document.getElementById("deliv-name").value = "";
         document.getElementById("deliv-phone").value = "";
         document.getElementById("deliv-address").value = "";
         document.getElementById("delivery-form").style.display = "none";
 
         updateUI();
-        alert(`🙏 Cảm ơn quý khách đã mua sỉ hàng tại Shop Bán Sỉ Vau!`);
+        alert(`🙏 Shop Bán Sỉ Vau xin chân thành cảm ơn đơn đặt hàng của bạn! Chúc bạn một ngày tốt lành.`);
     }
 
+    // Logic Vòng Quay May Mắn
     function spinWheel() {
         if (freeSpins <= 0 || isSpinning) return;
         
