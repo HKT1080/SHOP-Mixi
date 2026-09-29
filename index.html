@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Bán Sỉ Vau</title>
+</head>
+<body>
+
+<div class="app-container">
+    <header class="shop-header">
+        <h1 class="shop-title">Shop Bán Sỉ Vau</h1>
+    </header>
+
+    <section class="auth-box">
+        <div id="auth-form-wrapper" class="auth-form">
+            <input type="text" id="reg-user" placeholder="Tên tài khoản..." required>
+            <input type="password" id="reg-pass" placeholder="Mật khẩu..." required>
+            <input type="email" id="reg-email" placeholder="Email..." required>
+            <button class="btn-general" onclick="handleRegister()">ĐĂNG KÝ TÀI KHOẢN</button>
+        </div>
+        <div id="user-info-panel" class="user-info-panel">
+            <span>👤 Tài khoản: <span id="display-name">...</span></span>
+            <span>💰 Số dư: <span id="display-balance">0</span> đ</span>
+        </div>
+    </section>
+
+    <main>
+        <h2 class="section-title">I. Danh Sách Chọn Mặt Hàng</h2>
+        <div class="products-list">
+            
+            <div class="product-card">
+                <div class="product-details">
+                    <h3>1. Gói Pack Online Game FC 27</h3>
+                    <div class="product-price">2,300,000 đ</div>
+                    <div class="product-stock">Kho sỉ: <strong id="stock-p1">1</strong> cái</div>
+                    <div id="acc-info-box" class="info-result-box">
+                        <strong>🔑 THÔNG TIN ACC GAME:</strong><br>
+                        • Account: <span style="color:var(--danger); font-weight:bold;">MESSIBETTERTHANRONALDO</span><br>
+                        • Mật khẩu: <span style="color:var(--danger); font-weight:bold;">2022worldcup</span>
+                    </div>
+                </div>
+                <button id="btn-buy-p1" class="btn-general" style="background:var(--success)" onclick="buyProduct('p1')" disabled>MUA</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-details">
+                    <h3>2. iPhone 20 Pro Max</h3>
+                    <div class="product-price">500,000 đ</div>
+                    <div class="product-stock">Kho sỉ: <strong id="stock-p2">2</strong> cái</div>
+                </div>
+                <button id="btn-buy-p2" class="btn-general" style="background:var(--success)" onclick="openDeliveryForm('p2')" disabled>MUA</button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-details">
+                    <h3>3. ThinkPad T480</h3>
+                    <div class="product-price">2,000,000 đ</div>
+                    <div class="product-stock">Kho sỉ: <strong id="stock-p3">42</strong> cái</div>
+                </div>
+                <button id="btn-buy-p3" class="btn-general" style="background:var(--success)" onclick="openDeliveryForm('p3')" disabled>MUA</button>
+            </div>
+
+        </div>
+
+        <div id="delivery-form" class="delivery-form-container">
+            <h4 id="delivery-title" style="margin: 0 0 10px 0; color:#334155;">Thông Tin Nhận Hàng</h4>
+            <div class="form-grid">
+                <input type="text" id="deliv-name" placeholder="Tên người nhận..." required>
+                <input type="text" id="deliv-phone" placeholder="Số điện thoại..." required>
+                <input type="text" id="deliv-address" placeholder="Địa chỉ giao hàng chi tiết..." required>
+            </div>
+            <button class="btn-general" onclick="submitDelivery()">XÁC NHẬN ĐẶT HÀNG</button>
+        </div>
+    </main>
+
+    <section class="wheel-section">
+        <h2 class="section-title" style="margin:0; width:100%;">II. Vòng Quay May Mắn (Còn <span id="spin-count">3</span> lượt Free)</h2>
+        
+        <div class="wheel-outer">
+            <div class="wheel-pointer"></div>
+            <div id="wheel" class="wheel"></div>
+        </div>
+
+        <button id="btn-spin" class="btn-general" style="background:#f59e0b; padding:12px 35px; border-radius:30px;" onclick="spinWheel()" disabled>QUAY THƯỞNG</button>
+
+        <div id="reward-display" class="reward-alert-box"></div>
+
+        <div id="reward-delivery-form" class="delivery-form-container" style="width: 100%;">
+            <h4 style="margin:0 0 10px 0; color:#065f46">🎁 Điền Thông Tin Giao Phần Thưởng</h4>
+            <div class="form-grid">
+                <input type="text" id="reward-name" placeholder="Tên người nhận quà..." required>
+                <input type="text" id="reward-phone" placeholder="Số điện thoại..." required>
+                <input type="text" id="reward-address" placeholder="Địa chỉ nhận quà..." required>
+            </div>
+            <button class="btn-general" style="background: var(--success);" onclick="submitRewardDelivery()">XÁC NHẬN NHẬN QUÀ</button>
+        </div>
+    </section>
+</div>
+<style>
+    :root {
+        --primary: #2563eb;
+        --primary-hover: #1d4ed8;
+        --success: #16a34a;
+        --danger: #dc2626;
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --text: #1e293b;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; }
+    .app-container { width: 100%; max-width: 700px; display: flex; flex-direction: column; gap: 20px; }
+    
+    .shop-header { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 25px; border-radius: 16px; text-align: center; box-shadow: 0 4px 15px rgba(37,99,235,0.1); }
+    .shop-title { font-size: 2.2em; font-weight: 800; margin: 0; letter-spacing: 1px; text-transform: uppercase; }
+    
+    .auth-box { background: white; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .auth-form { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .auth-form input { padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%; max-width: 180px; font-size: 0.9em; }
+    .btn-general { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+    .btn-general:hover { background: var(--primary-hover); }
+    .btn-general:disabled { background: #cbd5e1; cursor: not-allowed; }
+    
+    .user-info-panel { display: none; width: 100%; justify-content: center; gap: 20px; font-weight: bold; font-size: 1.1em; flex-wrap: wrap; background: #e0f2fe; padding: 12px; border-radius: 8px; color: #0369a1; }
+    .section-title { font-size: 1.4em; font-weight: 700; color: #0f172a; margin: 15px 0 10px 0; border-left: 5px solid var(--primary); padding-left: 10px; }
+    
+    .products-list { display: flex; flex-direction: column; gap: 12px; }
+    .product-card { background: white; border-radius: 12px; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #e2e8f0; gap: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .product-details { flex: 1; min-width: 0; }
+    .product-details h3 { margin: 0 0 4px 0; color: #0f172a; font-size: 1.1em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .product-price { color: var(--danger); font-weight: bold; font-size: 1.1em; }
+    .product-stock { font-size: 0.85em; color: #64748b; margin-top: 2px; }
+    
+    .info-result-box { display: none; background: #fffde7; border-left: 4px solid #eab308; padding: 12px; margin-top: 10px; border-radius: 6px; font-size: 0.9em; word-break: break-all; }
+    .delivery-form-container { display: none; background: #f1f5f9; padding: 15px; border-radius: 8px; margin-top: 10px; border: 1px solid #cbd5e1; }
+    .form-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+    .form-grid input { padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9em; width: 100%; }
+    
+    .wheel-section { background: white; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; align-items: center; gap: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .wheel-outer { position: relative; width: 260px; height: 260px; margin: 10px 0; }
+    .wheel { width: 100%; height: 100%; border-radius: 50%; border: 6px solid #334155; background: conic-gradient(
+        #ef4444 0deg 0.9deg,     
+        #3b82f6 0.9deg 3.6deg,   
+        #10b981 3.6deg 18deg,    
+        #f59e0b 18deg 36deg,     
+        #8b5cf6 36deg 72deg,     
+        #ec4899 72deg 144deg,    
+        #64748b 144deg 252deg,   
+        #1e293b 252deg 360deg    
+    ); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
+    .wheel-pointer { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 12px solid transparent; border-right: 12px solid transparent; border-top: 24px solid #dc2626; z-index: 10; }
+    .reward-alert-box { display: none; background: #ecfdf5; border: 1px solid #10b981; padding: 12px; border-radius: 8px; text-align: center; color: #065f46; font-weight: bold; width: 100%; font-size: 0.95em; line-height: 1.4; }
+</style>
+<script>
+    const user = { registered: false, username: "", balance: 0 };
+    const products = {
+        p1: { name: "Gói Pack Online FC 27", price: 2300000, stock: 1 },
+        p2: { name: "iPhone 20 Pro Max", price: 500000, stock: 2 },
+        p3: { name: "ThinkPad T480", price: 2000000, stock: 42 }
+    };
+    let freeSpins = 3;
+    let currentSelectedProduct = "";
+    let isSpinning = false;
+
+    function handleRegister() {
+        const usernameInput = document.getElementById("reg-user").value.trim();
+        const passInput = document.getElementById("reg-pass").value.trim();
+        const emailInput = document.getElementById("reg-email").value.trim();
+
+        if (!usernameInput || !passInput || !emailInput) {
+            alert("Vui lòng điền đầy đủ thông tin đăng ký!");
+            return;
+        }
+
+        user.registered = true;
+        user.username = usernameInput;
+        user.balance = 10000000; 
+
+        document.getElementById("auth-form-wrapper").style.display = "none";
+        document.getElementById("user-info-panel").style.display = "flex";
+        document.getElementById("display-name").innerText = user.username;
+        
+        updateUI();
+        alert(`🎉 Đăng ký thành công!\nBạn đã nhận được quà tặng 10,000,000đ để mua sắm.`);
+    }
+
+    function updateUI() {
+        document.getElementById("display-balance").innerText = user.balance.toLocaleString();
+        document.getElementById("stock-p1").innerText = products.p1.stock;
+        document.getElementById("stock-p2").innerText = products.p2.stock;
+        document.getElementById("stock-p3").innerText = products.p3.stock;
+        document.getElementById("spin-count").innerText = freeSpins;
+
+        if (user.registered) {
+            document.getElementById("btn-buy-p1").disabled = products.p1.stock <= 0 || user.balance < products.p1.price;
+            document.getElementById("btn-buy-p2").disabled = products.p2.stock <= 0 || user.balance < products.p2.price;
+            document.getElementById("btn-buy-p3").disabled = products.p3.stock <= 0 || user.balance < products.p3.price;
+            document.getElementById("btn-spin").disabled = freeSpins <= 0 || isSpinning;
+        }
+    }
+
+    function buyProduct(id) {
+        const prod = products[id];
+        if (user.balance < prod.price) return;
+        
+        user.balance -= prod.price; 
+        prod.stock -= 1; 
+        
+        document.getElementById("acc-info-box").style.display = "block";
+        updateUI();
+        alert("🎉 Mua thành công! Hãy xem thông tin tài khoản hiển thị trên màn hình.");
+    }
+
+    function openDeliveryForm(id) {
+        currentSelectedProduct = id;
+        const prod = products[id];
+        if (user.balance < prod.price) return;
+        
+        document.getElementById("delivery-title").innerText = `Nhận hàng: ${prod.name}`;
+        document.getElementById("delivery-form").style.display = "block";
+        document.getElementById("delivery-form").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function submitDelivery() {
+        const name = document.getElementById("deliv-name").value.trim();
+        const phone = document.getElementById("deliv-phone").value.trim();
+        const addr = document.getElementById("deliv-address").value.trim();
+
+        if (!name || !phone || !addr) {
+            alert("Vui lòng điền trọn vẹn thông tin nhận hàng!");
+            return;
+        }
+
+        const prod = products[currentSelectedProduct];
+        user.balance -= prod.price; 
+        prod.stock -= 1; 
+
+        document.getElementById("deliv-name").value = "";
+        document.getElementById("deliv-phone").value = "";
+        document.getElementById("deliv-address").value = "";
+        document.getElementById("delivery-form").style.display = "none";
+
+        updateUI();
+        alert(`🙏 Cảm ơn quý khách đã mua sỉ hàng tại Shop Bán Sỉ Vau!`);
+    }
+
+    function spinWheel() {
+        if (freeSpins <= 0 || isSpinning) return;
+        
+        isSpinning = true;
+        freeSpins -= 1; 
+        updateUI();
+
+        document.getElementById("reward-display").style.display = "none";
+        document.getElementById("reward-delivery-form").style.display = "none";
+
+        const rand = Math.random() * 100;
+        let rewardText = "";
+        let targetAngle = 0; 
+
+        if (rand < 0.25) {
+            rewardText = "iPhone 100 pro legendary (0.25%)";
+            targetAngle = 0.45;
+        } else if (rand < 1.0) {
+            rewardText = "Card đồ họa RTX 6090ti Super (0.75%)";
+            targetAngle = 2.25;
+        } else if (rand < 5.0) {
+            rewardText = "Một bịch láp siêu ngon (4%)";
+            targetAngle = 10.8;
+        } else if (rand < 10.0) {
+            rewardText = "Một cái TV OLED 30 inch (5%)";
+            targetAngle = 27;
+        } else if (rand < 20.0) {
+            rewardText = "Một chiếc hộp bí ẩn siêu VIP (10%)";
+            targetAngle = 54;
+        } else if (rand < 40.0) {
+            rewardText = "Một chiếc Ferrari mô hình (20%)";
+            targetAngle = 108;
+        } else if (rand < 70.0) {
+            rewardText = "Một tài khoản game Free Fire (30%)";
+            targetAngle = 198;
+        } else {
+            rewardText = "Một cái nịt (30%)";
+            targetAngle = 306;
+        }
+
+        const totalRotation = 1800 + (360 - targetAngle); 
+        const wheel = document.getElementById("wheel");
+        wheel.style.transform = `rotate(${totalRotation}deg)`;
+
+        setTimeout(() => {
+            isSpinning = false;
+            updateUI();
+            
+            const rewardBox = document.getElementById("reward-display");
+            rewardBox.innerText = `🎁 KẾT QUẢ QUAY: Bạn đã trúng thưởng [ ${rewardText} ]`;
+            rewardBox.style.display = "block";
+
+            if (rand < 40.0) {
+                document.getElementById("reward-delivery-form").style.display = "block";
+            }
+            
+            wheel.style.transition = 'none';
+            wheel.style.transform = `rotate(${360 - targetAngle}deg)`;
+            setTimeout(() => {
+                wheel.style.transition = 'transform 4s cubic-bezier(0.1, 0.8, 0.1, 1)';
+            }, 50);
+
+        }, 4000);
+    }
+
+    function submitRewardDelivery() {
+        const name = document.getElementById("reward-name").value.trim();
+        const phone = document.getElementById("reward-phone").value.trim();
+        const addr = document.getElementById("reward-address").value.trim();
+
+        if (!name || !phone || !addr) {
+            alert("Vui lòng điền thông tin giao nhận quà tặng!");
+            return;
+        }
+
+        document.getElementById("reward-name").value = "";
+        document.getElementById("reward-phone").value = "";
+        document.getElementById("reward-address").value = "";
+        document.getElementById("reward-delivery-form").style.display = "none";
+
+        alert("🎉 Thông tin đã được lưu nhận thành công. Shop sỉ Vau sẽ sớm đóng gói quà và gửi tới bạn nhé!");
+    }
+</script>
+</body>
+</html>
